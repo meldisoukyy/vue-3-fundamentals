@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Handling Exercise</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ ping }}</h1>
+      <hr />
+
+      <h1>Football Players:</h1>
+      <ul>
+        <li v-for="player in playerList" style="padding: 5px">
+          {{ player.name }}
+          <button type="button" @click="() => favList.push(player)">
+            Add to Fav
+          </button>
+        </li>
+      </ul>
+      <hr />
+      <h1>Favorite Players:</h1>
+      <ul>
+        <p v-if="favList.length == 0">The list is empty.</p>
+        <li v-for="player in favList">{{ player.name }}</li>
+      </ul>
+      <hr />
+      <div>
+        <label>Add Player: </label>
+        <input type="text" v-model="newPlayer.name" @keyup.enter="addPlayer" />
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            ping: "Hello World!!",
+            playerList: [
+              { name: "Ronaldo" },
+              { name: "Messi" },
+              { name: "Salah" },
+            ],
+            favList: [],
+            newPlayer: { name: "" },
+          };
+        },
+        methods: {
+          addPlayer() {
+            if (this.newPlayer.name !== "") {
+              this.playerList.push(this.newPlayer);
+              this.newPlayer = {
+                name: "",
+              };
+            }
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
