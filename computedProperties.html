@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playground — Complete Intro to Vue 3</title>
+  </head>
+  <body>
+    <div id="app">
+      <div style="width: 100%; text-align: center">
+        <h1>Players</h1>
+        <div v-for="player in playerList">
+          <ul>
+            <li>Player Name: {{player.name}}</li>
+            <li>Player Age: {{player.age}}</li>
+            <li>Player Club: {{player.club}}</li>
+            <li>Player Nationality: {{player.nationality}}</li>
+          </ul>
+          <br />
+        </div>
+        <h2>Stats</h2>
+        <div>
+          <ul>
+            <li v-for="player in playerOver20YearList"> {{ player.name }} </li>  
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      Vue.createApp({
+        data: () => {
+          return {
+            playerList: [
+              {
+                name: "Player 01",
+                age: 20,
+                club: "Club 01",
+                nationality: "Egypt",
+              },
+              {
+                name: "Player 02",
+                age: 18,
+                club: "Club 01",
+                nationality: "USA",
+              },
+              {
+                name: "Player 03",
+                age: 24,
+                club: "Club 02",
+                nationality: "Egypt",
+              },
+            ],
+          };
+        },
+        computed: {
+          playerOver20YearList() {
+            return this.playerList.filter((player) => {
+              if (player.age >= 20) {
+                return true;
+              }
+            });
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
